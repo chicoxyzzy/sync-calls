@@ -54,7 +54,7 @@ function createApi(scheme, sab) {
       Atomics.wait(i32v, 0, 0);
 
       const value = deserialize(sab);
-      // if (isPromiseLike)
+      // TODO: if (isPromiseLike)
       i32v[0] = 0;
       return value;
     }
@@ -66,6 +66,6 @@ export function useApi() {
     self.addEventListener('message', ({ data }) => {
       const [sab, ...methods] = data;
       resolve(createApi(methods, sab));
-    });
+    }, { once: true });
   });
 }
