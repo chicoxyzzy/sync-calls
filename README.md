@@ -17,6 +17,8 @@ Files:
 - [api.js](./src/api.js) — this file includes both main thread logic and Worker
 thread logic implementation
 
+### In general, this approach can help turn asynchronous calls into synchronous calls.
+
 [SharedArrayBuffer]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SharedArrayBuffer
 [Atomics.wait]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Atomics/wait
 [Atomics.notify]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Atomics/notify
