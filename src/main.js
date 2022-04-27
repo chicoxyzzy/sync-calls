@@ -15,7 +15,7 @@ const api = {
     localStorage.setItem(key, value);
     console.log('write', key, value);
   },
-  foo(string) {
+  log(string) {
     console.log(string)
   },
 };
