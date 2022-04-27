@@ -14,7 +14,8 @@ achieve that.
 Files:
 - [main.js](./src/main.js) — main thread which exposes API to the Worker thread
 - [worker.js](./src/worker.js) — Worker thread with sync calls
-- [api.js]()
+- [api.js](./src/api.js) — this file includes both main thread logic and Worker
+thread logic implementation
 
 [SharedArrayBuffer]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SharedArrayBuffer
 [Atomics.wait]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Atomics/wait
