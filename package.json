@@ -1,9 +1,8 @@
 {
-  "name": "take-home-assignment",
+  "name": "localstorage-api-exposed-to-the-worker-thread",
   "version": "0.0.0",
   "scripts": {
-    "start": "lite-server -c browser-sync.config.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "lite-server -c browser-sync.config.js"
   },
   "dependencies": {
     "lite-server": "^2.6.1"
