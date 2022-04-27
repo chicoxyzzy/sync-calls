@@ -1,9 +1,9 @@
 import { useApi } from './api.js';
 
-const localStorage = await useApi();
+const syncApi = await useApi();
 
-localStorage.setItem('Earth', 'Mostly harmless');
+syncApi.setItem('Earth', 'Mostly harmless');
 console.log('this should be 2nd line');
-const earth = localStorage.getItem('Earth');
-localStorage.foo('this should be 4th line');
+const earth = syncApi.getItem('Earth');
+syncApi.foo('this should be 4th line');
 console.log(earth);

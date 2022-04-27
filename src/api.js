@@ -1,12 +1,6 @@
-const ELEMENT_LENGTH = Int32Array.BYTES_PER_ELEMENT
+const ELEMENT_LENGTH = Int32Array.BYTES_PER_ELEMENT // 4 bytes
 
-/*
-| Flag | Length | String
---------------------------
-| 1/0  |   1    | value  |
-|   4  |   1    | 5 MiB  |
-*/
-
+// Main thread part
 function serialize(sab, rawValue) {
   const te = new TextEncoder();
   const value = te.encode(rawValue); // UInt8Array
@@ -14,16 +8,6 @@ function serialize(sab, rawValue) {
   dv.setInt32(1, value.byteLength);
   const valueView = new Uint8Array(sab, ELEMENT_LENGTH * 2);
   valueView.set(value);
-}
-
-function deserialize(sab) {
-  const dv = new DataView(sab);
-  const length = dv.getInt32(1);
-  if (length === 0) return;
-  const valueView = new Uint8Array(sab, ELEMENT_LENGTH * 2, length);
-  const dc = new TextDecoder();
-  return dc.decode(valueView);
-  // return String.fromCharCode.apply(null, valueView);
 }
 
 export function exposeApi(worker, api) {
@@ -45,6 +29,17 @@ export function exposeApi(worker, api) {
   });
 }
 
+// Worker thread part
+function deserialize(sab) {
+  const dv = new DataView(sab);
+  const length = dv.getInt32(1);
+  if (length === 0) return;
+  const valueView = new Uint8Array(sab, ELEMENT_LENGTH * 2, length);
+  const dc = new TextDecoder();
+  return dc.decode(valueView);
+  // return String.fromCharCode.apply(null, valueView);
+}
+
 function createApi(scheme, sab) {
   const i32v = new Int32Array(sab);
   return Object.fromEntries(scheme.map(name => [
@@ -54,7 +49,7 @@ function createApi(scheme, sab) {
       Atomics.wait(i32v, 0, 0);
 
       const value = deserialize(sab);
-      // TODO: if (isPromiseLike)
+      // TODO: if (isPromiseLike) { ... }
       i32v[0] = 0;
       return value;
     }
